@@ -5,11 +5,16 @@ from PyQt5 import uic
 import random
 
 
-class Circles(QWidget):
+class ui(QWidget):
+    def __init__(self):
+        super(ui, self).__init__()
+        uic.loadUi('UI.ui', self)
+
+
+class Circles(ui):
     def __init__(self):
         super(Circles, self).__init__()
         self.flag = False
-        uic.loadUi('UI.ui', self)
         self.paint_button.clicked.connect(self.draw)
 
     def draw(self):
@@ -20,7 +25,8 @@ class Circles(QWidget):
         if self.flag:
             qp = QPainter()
             qp.begin(self)
-            qp.setPen(QColor(255, 255, 0))
+            qp.setPen(QColor(random.choice(range(0, 255)), random.choice(range(0, 255)),
+                             random.choice(range(0, 255))))
             self.drawEllipse(qp)
             qp.end()
             self.flag = False
